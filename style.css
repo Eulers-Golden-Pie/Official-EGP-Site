@@ -185,41 +185,14 @@ h3 {
   background: rgba(255, 255, 255, 0.04);
 }
 
-.hero-media {
-  height: 520px;
-  display: grid;
-  grid-template-rows: 1fr 150px;
-  gap: 18px;
-}
-
-.hero-image-box {
-  overflow: hidden;
+.hero-media img {
+  width: 100%;
+  min-height: 520px;
+  height: 100%;
+  object-fit: cover;
   border-radius: 30px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.hero-image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.logo-box {
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  background:
-    radial-gradient(circle at center, rgba(56, 189, 248, 0.18), transparent 65%),
-    rgba(255, 255, 255, 0.04);
-}
-
-.logo-box img {
-  width: auto;
-  height: 100%;
-  max-height: 115px;
-  object-fit: contain;
 }
 
 .section-heading {
@@ -376,6 +349,7 @@ summary::marker {
   color: var(--blue);
 }
 
+/* Fix spacing around Hacks and FAQ */
 #hacks {
   padding-bottom: 38px;
 }
@@ -424,9 +398,8 @@ summary::marker {
     grid-template-columns: 1fr;
   }
 
-  .hero-media {
-    height: auto;
-    grid-template-rows: 340px 130px;
+  .hero-media img {
+    min-height: 340px;
   }
 
   .nav-toggle {
