@@ -330,6 +330,10 @@ details p {
   gap: 14px;
 }
 
+.faq-section {
+    padding-top: 20px;
+}
+
 details {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
