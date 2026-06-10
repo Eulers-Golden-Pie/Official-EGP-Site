@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -102,7 +103,7 @@ img {
 .section {
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 96px 0;
+  padding: 88px 0;
 }
 
 .hero {
@@ -195,7 +196,7 @@ h3 {
 }
 
 .section-heading {
-  margin-bottom: 42px;
+  margin-bottom: 38px;
 }
 
 .feature-grid,
@@ -248,7 +249,8 @@ details p {
 }
 
 .concept-panel {
-  margin-top: 28px;
+  margin-top: 24px;
+  margin-bottom: 0;
   background:
     linear-gradient(135deg, rgba(56, 189, 248, 0.13), rgba(253, 204, 45, 0.06)),
     var(--card-2);
@@ -330,10 +332,6 @@ details p {
   gap: 14px;
 }
 
-.faq-section {
-    padding-top: 20px;
-}
-
 details {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
@@ -349,6 +347,27 @@ summary {
 
 summary::marker {
   color: var(--blue);
+}
+
+/* Fix spacing around Hacks and FAQ */
+#hacks {
+  padding-bottom: 38px;
+}
+
+#hacks .concept-panel {
+  margin-bottom: 0;
+}
+
+#hacks .faq-list {
+  margin-top: 0;
+}
+
+#faq {
+  padding-top: 38px;
+}
+
+#faq .section-heading {
+  margin-bottom: 34px;
 }
 
 .final-cta {
@@ -407,5 +426,17 @@ summary::marker {
 
   .rule-item {
     grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  #hacks {
+    padding-bottom: 28px;
+  }
+
+  #faq {
+    padding-top: 28px;
   }
 }
