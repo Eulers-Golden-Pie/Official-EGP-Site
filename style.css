@@ -399,7 +399,13 @@ summary::marker {
   }
 
   .hero-media img {
-    min-height: 340px;
+    width: 100%;
+    min-height: 520px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
   }
 
   .nav-toggle {
