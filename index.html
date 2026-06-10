@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Euler's Golden Pie | Memory Game</title>
-  <meta name="description" content="Euler's Golden Pie is a memory-based strategy game where players transform digit sequences into creative stories and recall them using visual associations." />
+  <meta name="description" content="Euler's Golden Pie is a memory-building game where players convert digits into creative stories and associations, making long number sequences easier to remember and recall." />
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -45,7 +45,13 @@
       </div>
 
       <div class="hero-media">
-        <img src="assets/setup.png" alt="Euler's Golden Pie gameplay setup" />
+        <div class="hero-image-box setup-box">
+          <img src="assets/setup.png" alt="Euler's Golden Pie gameplay setup" />
+        </div>
+
+        <div class="hero-image-box logo-box">
+          <img src="assets/logo.png" alt="Euler's Golden Pie logo" />
+        </div>
       </div>
     </section>
 
@@ -79,14 +85,12 @@
       </div>
 
       <div class="concept-panel">
-        <div>
-          <p class="eyebrow">The Core Loop</p>
-          <h3>Digits → Peg Cards → Story → Recall</h3>
-          <p>
-            The power of the game comes from transforming numbers into meaningful associations.
-            Instead of memorizing raw digits, players create a story that gives the sequence structure.
-          </p>
-        </div>
+        <p class="eyebrow">The Core Loop</p>
+        <h3>Digits → Peg Cards → Story → Recall</h3>
+        <p>
+          The power of the game comes from transforming numbers into meaningful associations.
+          Instead of memorizing raw digits, players create a story that gives the sequence structure.
+        </p>
       </div>
     </section>
 
@@ -199,7 +203,6 @@
             </p>
           </div>
           <div class="video-frame">
-            <!-- Replace INTRO_VIDEO_ID with your YouTube video ID -->
             <iframe src="https://www.youtube.com/embed/UqQAb56irXM" title="Euler's Golden Pie intro video" allowfullscreen></iframe>
           </div>
         </article>
@@ -212,7 +215,6 @@
             </p>
           </div>
           <div class="video-frame">
-            <!-- Replace FULL_GAMEPLAY_VIDEO_ID with your YouTube video ID -->
             <iframe src="https://www.youtube.com/embed/r7oWhKs37mU" title="Euler's Golden Pie full gameplay demonstration" allowfullscreen></iframe>
           </div>
         </article>
@@ -220,97 +222,91 @@
     </section>
 
     <section id="hacks" class="section">
-  <div class="section-heading">
-    <p class="eyebrow">Strategies & Hacks</p>
-    <h2>Advanced Encoding Techniques</h2>
-    <p>
-      There is no single correct way to encode a digit sequence.
-      As players gain experience, they often develop their own
-      techniques to reduce the number of peg cards used and build
-      stronger stories.
-    </p>
-  </div>
+      <div class="section-heading">
+        <p class="eyebrow">Strategies & Hacks</p>
+        <h2>Advanced Encoding Techniques</h2>
+        <p>
+          There is no single correct way to encode a digit sequence.
+          As players gain experience, they often develop their own
+          techniques to reduce the number of peg cards used and build
+          stronger stories.
+        </p>
+      </div>
 
-  <div class="concept-panel">
-    <h3>Important Note</h3>
-    <p>
-      Euler's Golden Pie encourages creativity. Two players may encode
-      the exact same digit sequence in completely different ways and
-      still arrive at the correct answer during recall.
-    </p>
-  </div>
-      
-  <div class="faq-list">
+      <div class="concept-panel">
+        <h3>Important Note</h3>
+        <p>
+          Euler's Golden Pie encourages creativity. Two players may encode
+          the exact same digit sequence in completely different ways and
+          still arrive at the correct answer during recall.
+        </p>
+      </div>
 
-    <details>
-      <summary>Use Larger Peg Cards</summary>
-      <p>
-        Instead of encoding 46 as 4 and 6, a player may choose to use
-        a 40 or 44 peg card and remember the remaining difference mentally.
-        This can reduce the total number of peg cards needed.
-      </p>
-    </details>
+      <div class="faq-list">
+        <details>
+          <summary>Use Larger Peg Cards</summary>
+          <p>
+            Instead of encoding 46 as 4 and 6, a player may choose to use
+            a 40 or 44 peg card and remember the remaining difference mentally.
+            This can reduce the total number of peg cards needed.
+          </p>
+        </details>
 
-   <details>
-  <summary>Example: Reducing Peg Cards</summary>
+        <details>
+          <summary>Example: Reducing Peg Cards</summary>
+          <p>
+            Sequence: <strong>43, 57, 29, 84</strong>
+          </p>
 
-  <p>
-    Sequence: <strong>43, 57, 29, 84</strong>
-  </p>
+          <p>
+            Instead of using separate peg cards for every digit, a player may choose to use nearby anchor cards such as 44, 55, 22, or 88 and mentally remember the small differences.
+          </p>
 
-  <p>
-    Instead of using separate peg cards for every digit, a player
-    may choose to use nearby anchor cards such as 44, 55, 22, or 88
-    and mentally remember the small differences.
-  </p>
+          <p>
+            Example: the words in capitals indicate the peg cards being used.
+            <br />
+            43 → 40 + 3 → We had a huge <strong>PARTY</strong> and celebrated for three hours.
+            <br />
+            57 → 55 + 2 → I was stopped by a <strong>POLICE</strong> car and was allowed to leave after 2 minutes.
+            <br />
+            29 → 22 + 7 → I bought a <strong>DOUBLE-DOUBLE</strong> coffee for seven dollars.
+            <br />
+            84 → 88 − 4 → I had a few <strong>BUTTERFLIES</strong>, but then I lost 4 of them.
+          </p>
 
-  <p>
-    Example (note that the words in capital are the ones for which a peg cards will be used):
-    <br>
-    43 → 40 + 3  → We had a huge PARTY and celebrated for three hours.
-    <br>
-    57 → 55 + 2 → I was stopped by a POLICE car and was allowed to leave after 2 mins.
-    <br>
-    29 → 22 + 7 → I bought a DOUBLE-DOUBLE coffee for seven dollars.
-    <br>
-    84 → 88 − 4 → I had a few BUTTERFLIES, but then I lost 4 of them.
-  </p>
+          <p>
+            This technique can reduce the number of peg cards used while still preserving accurate recall.
+          </p>
+        </details>
 
-  <p>
-    This technique can reduce the number of peg cards used while
-    still preserving accurate recall.
-  </p>
+        <details>
+          <summary>Build Around Anchor Numbers</summary>
+          <p>
+            Peg cards such as 33, 44, 55, 66, 77, 88, 99, and 100 can serve
+            as memorable anchor points. Players may find it easier to build
+            stories around these cards and mentally adjust nearby values.
+          </p>
+        </details>
 
-</details>
-    <details>
-      <summary>Build Around Anchor Numbers</summary>
-      <p>
-        Peg cards such as 33, 44, 55, 66, 77, 88, 99, and 100 can serve
-        as memorable anchor points. Players may find it easier to build
-        stories around these cards and mentally adjust nearby values.
-      </p>
-    </details>
+        <details>
+          <summary>Use Familiar Associations</summary>
+          <p>
+            If a particular peg card is especially memorable, players can
+            use it as a reference point and mentally account for small
+            differences in value.
+          </p>
+        </details>
 
-    <details>
-      <summary>Use Familiar Associations</summary>
-      <p>
-        If a particular peg card is especially memorable, players can
-        use it as a reference point and mentally account for small
-        differences in value.
-      </p>
-    </details>
-
-    <details>
-      <summary>Create Cause-and-Effect Stories</summary>
-      <p>
-        Stories are often easier to remember when objects interact.
-        Instead of listing items, try making one object cause an action
-        that affects another object. This creates a stronger memory chain.
-      </p>
-    </details>
-
-  </div>
-</section>
+        <details>
+          <summary>Create Cause-and-Effect Stories</summary>
+          <p>
+            Stories are often easier to remember when objects interact.
+            Instead of listing items, try making one object cause an action
+            that affects another object. This creates a stronger memory chain.
+          </p>
+        </details>
+      </div>
+    </section>
 
     <section id="faq" class="section faq-section">
       <div class="section-heading">
@@ -321,27 +317,27 @@
       <div class="faq-list">
         <details>
           <summary>What is Euler's Golden Pie?</summary>
-          <p>Euler's Golden Pie (EGP) is a memory game and learning system designed to make memorizing long number sequences faster, easier, and more enjoyable. Instead of trying to remember random digits such as 3.1415926535..., players convert numbers into memorable images, creative stories, and meaningful associations. By linking digits to visual and imaginative concepts, EGP takes advantage of the brain's natural ability to remember stories better than isolated numbers.</p>
+          <p>Euler's Golden Pie (EGP) is a memory game and learning system designed to make memorizing long number sequences faster, easier, and more enjoyable.</p>
         </details>
 
         <details>
           <summary>What is the goal of the game?</summary>
-          <p>The goal of Euler's Golden Pie (EGP) is to memorize and recall increasingly longer digit sequences by converting numbers into memorable images and stories. Players use EGP numerals, creativity, and association techniques to build mental connections between digits. The winner is the player who correctly recalls the greatest number of digits in the exact sequence order.</p>
+          <p>The goal is to memorize and recall increasingly longer digit sequences by converting numbers into memorable images and stories.</p>
         </details>
 
         <details>
           <summary>How does the Encode Phase work?</summary>
-          <p>During the Encode phase, players observe the digits on the selected card and use their peg cards to convert each digit into a corresponding visual mnemonic. The peg cards are arranged in order to represent the full numerical sequence.</p>
+          <p>During the Encode phase, players observe the digits on the selected card and use their peg cards to convert each digit into a corresponding visual mnemonic.</p>
         </details>
 
         <details>
           <summary>How does the Build Phase work?</summary>
-          <p>In the Build phase, players connect these visual mnemonics into a meaningful, vivid, or imaginative story. Creating strong and unusual connections between the images helps improve memory and makes recall easier.</p>
+          <p>In the Build phase, players connect these visual mnemonics into a meaningful, vivid, or imaginative story.</p>
         </details>
 
         <details>
           <summary>How does the Recall Phase work?</summary>
-          <p>During the Recall phase, players attempt to reconstruct and state the original numerical sequence from memory. Players may recall the digits mentally or by referencing the sequence of mnemonic images they created.</p>
+          <p>During the Recall phase, players attempt to reconstruct and state the original numerical sequence from memory.</p>
         </details>
 
         <details>
@@ -351,14 +347,13 @@
 
         <details>
           <summary>How are ties broken?</summary>
-          <p>If two or more players correctly recall the same number of digits, the tied players continue to the next digit sequence length. The tie is broken when one player recalls more digits correctly in the exact sequence order than the other player(s).</p>
+          <p>If two or more players correctly recall the same number of digits, the tied players continue to the next digit sequence length.</p>
         </details>
 
         <details>
           <summary>Should I hide my cards or can they be public knowledge?</summary>
-          <p>Players may keep their cards visible to all players. The challenge of the game is not remembering the cards themselves, but using them to create effective stories and accurately recall the digit sequence.</p>
+          <p>Players may keep their cards visible to all players. The challenge is not remembering the cards themselves, but using them to create effective stories.</p>
         </details>
-        
       </div>
     </section>
   </main>
