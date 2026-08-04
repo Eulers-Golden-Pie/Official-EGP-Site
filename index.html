@@ -2,386 +2,188 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Euler's Golden Pie | Cognitive Memory Training Game</title>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <meta name="description"
-  content="Euler's Golden Pie is an innovative cognitive memory training game that transforms numbers into visual stories using peg images, helping improve memory, recall, and learning.">
-  
-  <meta name="keywords"
-  content="memory game,memory training,cognitive training,peg system,visual memory,Euler's Golden Pie">
-  
-  <meta name="author"
-  content="Siddharth Sureshh">
-  <meta name="robots"
-  content="index, follow">
-  <link rel="icon" href="/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Euler's Golden Pie | Turn Numbers Into Stories</title>
+  <meta name="description" content="Euler's Golden Pie is an innovative memory game that transforms digits into visual stories, helping players build stronger recall, creativity, and focus." />
+  <meta name="keywords" content="memory game, memory training, cognitive training, peg system, visual memory, Euler's Golden Pie" />
+  <meta name="author" content="Siddharth Sureshh" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#03101f" />
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <header class="site-header">
-    <nav class="nav">
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="page-glow glow-one" aria-hidden="true"></div>
+  <div class="page-glow glow-two" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" data-header>
+    <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="#home" aria-label="Euler's Golden Pie home">
-        <img src="assets/logo.png" alt="Euler's Golden Pie logo" />
-        <span>Euler's Golden Pie</span>
+        <span class="brand-mark"><img src="assets/logo.png" alt="" /></span>
+        <span class="brand-copy"><strong>Euler's Golden Pie</strong><small>Memory, engineered.</small></span>
       </a>
-
-      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#rules">Rules</a>
+        <a href="#about">The System</a>
+        <a href="#rules">How It Works</a>
         <a href="#components">Components</a>
-        <a href="#videos">Videos</a>
-        <a href="#hacks">Hacks</a>
+        <a href="#videos">Watch</a>
+        <a href="#hacks">Strategies</a>
         <a href="#faq">FAQ</a>
       </div>
+      <a class="nav-cta" href="#videos">See EGP in action <span>↗</span></a>
     </nav>
   </header>
 
   <main>
-    <section id="home" class="hero section">
-      <div class="hero-copy">
-        <p class="eyebrow">Build • Encode • Recall</p>
-        <h1>Learn Faster. 
-          Remember Longer. 
-          Have Fun.</h1>
-        <p class="hero-text">
-          Euler's Golden Pie is a memory-building game that challenges players to convert digits into creative stories and associations, making long number sequences easier to remember and recall.
-        </p>
-
+    <section id="home" class="hero shell">
+      <div class="hero-copy reveal">
+        <div class="status-pill"><span></span> Patent pending memory system</div>
+        <p class="eyebrow">Visualize. Narrate. Remember.</p>
+        <h1>Numbers were never meant to be <em>forgettable.</em></h1>
+        <p class="hero-text">Euler's Golden Pie transforms cold digit sequences into vivid visual stories—making memory feel less like repetition and more like imagination in motion.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#videos">Watch Videos</a>
-          <a class="btn secondary" href="#rules">Learn the Rules</a>
+          <a class="btn primary magnetic" href="#about"><span>Explore the system</span><b>→</b></a>
+          <a class="btn secondary" href="#videos"><span class="play-icon">▶</span> Watch how it works</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>3</strong><span>Core phases</span></div>
+          <div><strong>∞</strong><span>Possible stories</span></div>
+          <div><strong>1</strong><span>Unforgettable system</span></div>
         </div>
       </div>
 
-      <div class="hero-media">
-        <img src="assets/setup.png" alt="Euler's Golden Pie gameplay setup" />
+      <div class="hero-stage reveal" data-delay="120">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="stage-label top"><span>01</span> Encode</div>
+        <div class="stage-label right"><span>02</span> Build</div>
+        <div class="stage-label bottom"><span>03</span> Recall</div>
+        <div class="product-frame tilt-card" data-tilt-strength="7">
+          <div class="product-shine"></div>
+          <img src="assets/setup.png" alt="Euler's Golden Pie gameplay setup" />
+          <div class="frame-caption"><span>EGP</span><p>The complete memory experience</p></div>
+        </div>
+        <div class="floating-chip chip-a">π</div><div class="floating-chip chip-b">φ</div><div class="floating-chip chip-c">e</div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to learn more"><span></span>Scroll to discover</a>
+    </section>
+
+    <section class="marquee" aria-label="Euler's Golden Pie principles">
+      <div class="marquee-track">
+        <span>VISUAL MEMORY</span><i>◆</i><span>CREATIVE STORYTELLING</span><i>◆</i><span>FOCUSED RECALL</span><i>◆</i><span>MEMORY, ENGINEERED</span><i>◆</i>
+        <span>VISUAL MEMORY</span><i>◆</i><span>CREATIVE STORYTELLING</span><i>◆</i><span>FOCUSED RECALL</span><i>◆</i><span>MEMORY, ENGINEERED</span><i>◆</i>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">About the Game</p>
-        <h2>A creative way to remember digits</h2>
-        <p>
-          Euler's Golden Pie is a memory game that turns numbers into images, stories, and meaningful connections, helping players memorize and recall long digit sequences while developing creativity and focus.
-        </p>
+    <section id="about" class="section shell">
+      <div class="section-intro reveal">
+        <div><p class="eyebrow">The system</p><h2>Memory becomes powerful when information becomes meaningful.</h2></div>
+        <p>EGP replaces raw repetition with a three-stage cognitive loop. Digits become images. Images become stories. Stories become recall.</p>
       </div>
 
-      <div class="feature-grid">
-        <article class="feature-card">
-          <span class="feature-number">01</span>
-          <h3>Encode</h3>
-          <p>Convert digits into visual peg cards that represent numbers or number groups.</p>
+      <div class="process-grid">
+        <article class="process-card reveal tilt-card" data-step="01">
+          <div class="process-icon"><span>7</span><span>→</span><span>🌈</span></div>
+          <p class="mini-label">Phase one</p><h3>Encode</h3><p>Convert digits into distinctive visual peg cards that give abstract numbers a recognizable identity.</p><div class="card-line"></div>
         </article>
-
-        <article class="feature-card">
-          <span class="feature-number">02</span>
-          <h3>Build</h3>
-          <p>Connect the peg cards into a story using actions, causes, tools, and consequences.</p>
+        <article class="process-card featured reveal tilt-card" data-delay="100" data-step="02">
+          <div class="process-icon story"><span>🕯️</span><span>⚡</span><span>🎂</span></div>
+          <p class="mini-label">Phase two</p><h3>Build</h3><p>Connect images through actions, causes, tools, and consequences to create a vivid memory chain.</p><div class="card-line"></div>
         </article>
-
-        <article class="feature-card">
-          <span class="feature-number">03</span>
-          <h3>Recall</h3>
-          <p>Decode the story back into the original digit sequence from memory.</p>
+        <article class="process-card reveal tilt-card" data-delay="200" data-step="03">
+          <div class="process-icon"><span>🧠</span><span>→</span><span>7</span></div>
+          <p class="mini-label">Phase three</p><h3>Recall</h3><p>Replay the story, decode each visual cue, and reconstruct the original sequence in order.</p><div class="card-line"></div>
         </article>
       </div>
 
-      <div class="concept-panel">
-        <p class="eyebrow">The Core Loop</p>
-        <h3>Digits → Peg Cards → Story → Recall</h3>
-        <p>
-          The power of the game comes from transforming numbers into meaningful associations.
-          Instead of memorizing raw digits, players create a story that gives the sequence structure.
-        </p>
+      <div class="memory-engine reveal">
+        <div class="engine-copy"><p class="eyebrow">The core loop</p><h3>From abstract data to a story your brain actually wants to keep.</h3><p>Instead of fighting the brain's natural preference for imagery and meaning, EGP works with it.</p></div>
+        <div class="engine-flow" aria-label="Digits to peg cards to story to recall">
+          <div><b>314</b><span>Digits</span></div><i>→</i><div><b>🕯️🚦🧭</b><span>Peg cards</span></div><i>→</i><div><b>🎬</b><span>Story</span></div><i>→</i><div><b>314</b><span>Recall</span></div>
+        </div>
       </div>
     </section>
 
-    <section id="rules" class="section dark-section">
-      <div class="section-heading">
-        <p class="eyebrow">Rules</p>
-        <h2>How to play</h2>
-        <p>
-          The goal is simple: remember the digit sequence better than your opponent.
-          The challenge is how creatively and accurately you can encode it.
-        </p>
-      </div>
-
-      <div class="rules-list">
-        <article class="rule-item">
-          <span>01</span>
-          <div>
-            <h3>Select a Digit Card</h3>
-            <p>Each player selects a digit card from one of the digit decks.</p>
+    <section id="rules" class="section full-bleed dark-zone">
+      <div class="shell">
+        <div class="section-intro reveal"><div><p class="eyebrow">How it works</p><h2>Simple rules. Serious cognitive firepower.</h2></div><p>Every round moves through a deliberate sequence designed to turn observation into imagination—and imagination into accurate recall.</p></div>
+        <div class="rules-layout">
+          <div class="rule-rail" aria-hidden="true"><span class="rule-progress"></span></div>
+          <div class="rules-list">
+            <article class="rule-item reveal"><span class="rule-number">01</span><div><p class="mini-label">Choose</p><h3>Select a digit card</h3><p>Each player draws a sequence from one of the mathematical constant decks.</p></div><b>↗</b></article>
+            <article class="rule-item reveal"><span class="rule-number">02</span><div><p class="mini-label">Translate</p><h3>Encode the digits</h3><p>Use peg cards to transform each digit or digit group into a memorable visual cue.</p></div><b>↗</b></article>
+            <article class="rule-item reveal"><span class="rule-number">03</span><div><p class="mini-label">Imagine</p><h3>Build a story</h3><p>Link the selected peg cards into one vivid, unusual, and logically connected narrative.</p></div><b>↗</b></article>
+            <article class="rule-item reveal"><span class="rule-number">04</span><div><p class="mini-label">Reconstruct</p><h3>Recall and verify</h3><p>Replay the story mentally, decode the visuals, and state the original sequence.</p></div><b>↗</b></article>
+            <article class="rule-item reveal"><span class="rule-number">05</span><div><p class="mini-label">Compete</p><h3>Win the round</h3><p>The player who accurately recalls the greatest number of digits in sequence wins.</p></div><b>↗</b></article>
           </div>
-        </article>
-
-        <article class="rule-item">
-          <span>02</span>
-          <div>
-            <h3>Encode the Digits (Encode Phase)</h3>
-            <p>Players use peg cards to represent the digits in the selected sequence.</p>
-          </div>
-        </article>
-
-        <article class="rule-item">
-          <span>03</span>
-          <div>
-            <h3>Build a Story (Build Phase)</h3>
-            <p>Players connect the selected peg cards into a memorable story.</p>
-          </div>
-        </article>
-
-        <article class="rule-item">
-          <span>04</span>
-          <div>
-            <h3>Recall and Verify (Recall Phase)</h3>
-            <p>Players exchange digit cards for verification and take turns reciting their sequences.</p>
-          </div>
-        </article>
-
-        <article class="rule-item">
-          <span>05</span>
-          <div>
-            <h3>Win the Game</h3>
-            <p>The player who correctly recalls the greatest number of digits in the original sequence wins.</p>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="components" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Components</p>
-        <h2>What's included</h2>
-        <p>
-          Euler's Golden Pie uses digit cards, peg cards, and peg stands to make number memory visual and interactive.
-        </p>
-      </div>
-
-      <div class="component-grid">
-        <article class="component-card">
-          <img src="assets/digitcards.png" alt="Euler's Golden Pie digit cards" />
-          <h3>Digit Cards</h3>
-          <p>Cards containing the digit sequences players must encode and recall.</p>
-        </article>
-
-        <article class="component-card">
-          <img src="assets/pegcards.png" alt="Euler's Golden Pie peg cards" />
-          <h3>Peg Cards</h3>
-          <p>Visual cards that help players represent digits through images, associations, and story creation.</p>
-        </article>
-
-        <article class="component-card">
-          <img src="assets/pegstand.png" alt="Euler's Golden Pie peg stand" />
-          <h3>Peg Stand</h3>
-          <p>A stand used to arrange peg cards during the Encode and Build Phases.</p>
-        </article>
-
-        <article class="component-card">
-          <img src="assets/setup.png" alt="Euler's Golden Pie full gameplay setup" />
-          <h3>Gameplay Setup</h3>
-          <p>A complete layout showing the materials used during gameplay.</p>
-        </article>
+    <section id="components" class="section shell">
+      <div class="section-intro reveal"><div><p class="eyebrow">The collection</p><h2>Every component has a purpose.</h2></div><p>Physical tools turn the learning process into something players can see, touch, arrange, and remember.</p></div>
+      <div class="component-showcase">
+        <article class="component-card wide reveal tilt-card"><div class="component-image"><img src="assets/digitcards.png" alt="Euler's Golden Pie digit cards" /><span>01</span></div><div><p class="mini-label">The challenge</p><h3>Digit Cards</h3><p>Sequences based on π, e, and φ provide the numerical patterns players encode and recall.</p></div></article>
+        <article class="component-card reveal tilt-card" data-delay="80"><div class="component-image"><img src="assets/pegcards.png" alt="Euler's Golden Pie peg cards" /><span>02</span></div><div><p class="mini-label">The language</p><h3>Peg Cards</h3><p>Visual associations that turn digits into memorable objects, concepts, and actions.</p></div></article>
+        <article class="component-card reveal tilt-card" data-delay="160"><div class="component-image"><img src="assets/pegstand.png" alt="Euler's Golden Pie peg stand" /><span>03</span></div><div><p class="mini-label">The canvas</p><h3>Peg Stand</h3><p>A physical stage for arranging and connecting visual cues during play.</p></div></article>
+        <article class="component-card wide reverse reveal tilt-card"><div class="component-image"><img src="assets/setup.png" alt="Euler's Golden Pie complete gameplay setup" /><span>04</span></div><div><p class="mini-label">The experience</p><h3>Complete Setup</h3><p>All elements come together in a focused, tactile, and competitive memory environment.</p></div></article>
       </div>
     </section>
 
-    <section id="videos" class="section dark-section">
-      <div class="section-heading">
-        <p class="eyebrow">Videos</p>
-        <h2>Watch the game in action</h2>
-        <p>
-          Start with the intro video to learn the game, components, FAQs, and a short sample gameplay.
-          Then watch the full gameplay demonstration.
-        </p>
-      </div>
-
-      <div class="video-grid">
-        <article class="video-card">
-          <div class="video-copy">
-            <h3>Intro, Components, FAQs, and Sample Gameplay</h3>
-            <p>
-              A short overview featuring the game explanation, components, common questions,
-              and a sample gameplay demonstration.
-            </p>
-          </div>
-          <div class="video-frame">
-            <iframe src="https://www.youtube.com/embed/UqQAb56irXM" title="Euler's Golden Pie intro video" allowfullscreen></iframe>
-          </div>
-        </article>
-
-        <article class="video-card">
-          <div class="video-copy">
-            <h3>Full Gameplay Demonstration</h3>
-            <p>
-              A complete walkthrough showing the Encode, Build, and Recall Phases from start to finish.
-            </p>
-          </div>
-          <div class="video-frame">
-            <iframe src="https://www.youtube.com/embed/r7oWhKs37mU" title="Euler's Golden Pie full gameplay demonstration" allowfullscreen></iframe>
-          </div>
-        </article>
+    <section id="videos" class="section full-bleed cinema-zone">
+      <div class="shell">
+        <div class="section-intro reveal"><div><p class="eyebrow">See it in motion</p><h2>Watch memory transform.</h2></div><p>See the complete EGP process—from first digit to final recall.</p></div>
+        <div class="video-grid">
+          <article class="video-card reveal"><div class="video-head"><span>01</span><div><p class="mini-label">Start here</p><h3>Intro, components, FAQs & sample gameplay</h3></div></div><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/UqQAb56irXM" title="Euler's Golden Pie introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></article>
+          <article class="video-card reveal" data-delay="120"><div class="video-head"><span>02</span><div><p class="mini-label">Full experience</p><h3>Complete gameplay demonstration</h3></div></div><div class="video-frame"><iframe loading="lazy" src="https://www.youtube.com/embed/r7oWhKs37mU" title="Euler's Golden Pie full gameplay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></article>
+        </div>
       </div>
     </section>
 
-    <section id="hacks" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Strategies & Hacks</p>
-        <h2>Advanced Encoding Techniques</h2>
-        <p>
-          There is no single correct way to encode a digit sequence.
-          As players gain experience, they often develop their own
-          techniques to reduce the number of peg cards used and build
-          stronger stories.
-        </p>
-      </div>
-
-      <div class="concept-panel">
-        <h3>Important Note</h3>
-        <p>
-          Euler's Golden Pie encourages creativity. Two players may encode
-          the exact same digit sequence in completely different ways and
-          still arrive at the correct answer during recall.
-        </p>
-      </div>
-
-      <div class="faq-list">
-        <details>
-          <summary>Use Larger Peg Cards</summary>
-          <p>
-            Instead of encoding 46 as 4 and 6, a player may choose to use
-            a 40 or 44 peg card and remember the remaining difference mentally.
-            This can reduce the total number of peg cards needed.
-          </p>
-        </details>
-
-        <details>
-          <summary>Example: Reducing Peg Cards</summary>
-          <p>
-            Sequence: <strong>43, 57, 29, 84</strong>
-          </p>
-
-          <p>
-            Instead of using separate peg cards for every digit, a player may choose to use nearby anchor cards such as 44, 55, 22, or 88 and mentally remember the small differences.
-          </p>
-
-          <p>
-            Example: the words in capitals indicate the peg cards being used.
-            <br />
-            43 → 40 + 3 → We had a huge <strong>PARTY</strong> and it extended for three hours.
-            <br />
-            57 → 55 + 2 → I was stopped by a <strong>POLICE</strong> car for exceeding the speed limit by 2 MPH.
-            <br />
-            29 → 22 + 7 → I bought a <strong>DOUBLE-DOUBLE</strong> coffee and added another 7 creamers.
-            <br />
-            84 → 88 − 4 → I had a few <strong>BUTTERFLIES</strong>, but then I lost 4 of them.
-          </p>
-
-          <p>
-            This technique can reduce the number of peg cards used while still preserving accurate recall.
-          </p>
-        </details>
-
-        <details>
-          <summary>Build Around Anchor Numbers</summary>
-          <p>
-            Peg cards such as 33, 44, 55, 66, 77, 88, 99, and 100 can serve
-            as memorable anchor points. Players may find it easier to build
-            stories around these cards and mentally adjust nearby values.
-          </p>
-        </details>
-
-        <details>
-          <summary>Use Familiar Associations</summary>
-          <p>
-            If a particular peg card is especially memorable, players can
-            use it as a reference point and mentally account for small
-            differences in value.
-          </p>
-        </details>
-
-        <details>
-          <summary>Create Cause-and-Effect Stories</summary>
-          <p>
-            Stories are often easier to remember when objects interact.
-            Instead of listing items, try making one object cause an action
-            that affects another object. This creates a stronger memory chain.
-          </p>
-        </details>
+    <section id="hacks" class="section shell">
+      <div class="section-intro reveal"><div><p class="eyebrow">Advanced strategies</p><h2>The system has rules. Your imagination does not.</h2></div><p>Experienced players learn to compress, anchor, and personalize their stories—turning memory into an evolving skill.</p></div>
+      <div class="strategy-banner reveal"><div><span>✦</span><p>Two players can encode the same sequence in completely different ways and still arrive at the exact same answer.</p></div><strong>Creativity is not a side effect. It is the engine.</strong></div>
+      <div class="accordion-list">
+        <details class="reveal"><summary><span>01</span><strong>Use larger peg cards</strong><i></i></summary><div><p>Instead of encoding 46 as 4 and 6, use a nearby anchor such as 40 or 44 and mentally track the remaining difference. This reduces the number of physical cards required.</p></div></details>
+        <details class="reveal"><summary><span>02</span><strong>Reduce the number of peg cards</strong><i></i></summary><div><p>For a sequence such as 43, 57, 29, 84, players can build around anchors like 44, 55, 22, and 88, then remember the small adjustments through the story itself.</p></div></details>
+        <details class="reveal"><summary><span>03</span><strong>Build around anchor numbers</strong><i></i></summary><div><p>Highly memorable values such as 33, 44, 55, 66, 77, 88, 99, and 100 can act as stable reference points for nearby numbers.</p></div></details>
+        <details class="reveal"><summary><span>04</span><strong>Use familiar associations</strong><i></i></summary><div><p>Personal experiences, favorite objects, and familiar places make stories easier to reconstruct because the associations already matter to you.</p></div></details>
+        <details class="reveal"><summary><span>05</span><strong>Create cause-and-effect stories</strong><i></i></summary><div><p>Make one object trigger an action that affects the next. A chain of consequences is more memorable than an unrelated list.</p></div></details>
       </div>
     </section>
 
-    <section id="faq" class="section faq-section">
-      <div class="section-heading">
-        <p class="eyebrow">FAQ</p>
-        <h2>Frequently Asked Questions</h2>
+    <section id="faq" class="section shell faq-section">
+      <div class="section-intro reveal"><div><p class="eyebrow">Questions, answered</p><h2>Everything you need to know.</h2></div><p>Clear answers about gameplay, phases, winners, and the system behind EGP.</p></div>
+      <div class="accordion-list two-col">
+        <details class="reveal"><summary><strong>What is Euler's Golden Pie?</strong><i></i></summary><div><p>EGP is a memory game and learning system designed to make memorizing long number sequences faster, easier, and more enjoyable.</p></div></details>
+        <details class="reveal"><summary><strong>What makes EGP unique?</strong><i></i></summary><div><p>It combines memory training, creativity, physical components, and friendly competition in one experience.</p></div></details>
+        <details class="reveal"><summary><strong>Who goes first?</strong><i></i></summary><div><p>The youngest player begins the game.</p></div></details>
+        <details class="reveal"><summary><strong>What is the goal?</strong><i></i></summary><div><p>Memorize and accurately recall increasingly longer digit sequences using images and stories.</p></div></details>
+        <details class="reveal"><summary><strong>How does Encode work?</strong><i></i></summary><div><p>Players observe the digits and select peg cards that convert them into visual mnemonics.</p></div></details>
+        <details class="reveal"><summary><strong>How does Build work?</strong><i></i></summary><div><p>Players connect those visual mnemonics into a meaningful, vivid, or imaginative story.</p></div></details>
+        <details class="reveal"><summary><strong>How does Recall work?</strong><i></i></summary><div><p>Players mentally replay the story and translate each visual cue back into the original sequence.</p></div></details>
+        <details class="reveal"><summary><strong>Who wins?</strong><i></i></summary><div><p>The player who accurately recalls the most digits while preserving the correct order.</p></div></details>
+        <details class="reveal"><summary><strong>How are ties broken?</strong><i></i></summary><div><p>Tied players continue to the next sequence length until one player recalls more digits correctly.</p></div></details>
+        <details class="reveal"><summary><strong>Can peg cards stay visible?</strong><i></i></summary><div><p>Yes. The challenge is not remembering the cards—it is building and decoding the story effectively.</p></div></details>
       </div>
+    </section>
 
-      <div class="faq-list">
-        <details>
-          <summary>What is Euler's Golden Pie?</summary>
-          <p>Euler's Golden Pie (EGP) is a memory game and learning system designed to make memorizing long number sequences faster, easier, and more enjoyable.</p>
-        </details>
-
-        <details>
-          <summary>What is unique about Euler's Golden Pie?</summary>
-          <p>Euler's Golden Pie combines memory training, creativity, and friendly competition into a single experience. Players don't simply memorize digits—they transform them into stories, images, and meaningful connections. As players gain experience, they naturally develop their own memory strategies, allowing them to remember longer sequences while creating unique stories along the way.</p>
-        </details>
-
-        <details>
-          <summary>Who goes first?</summary>
-          <p>The youngest person between the two players will go first.</p>
-        </details>
-
-        <details>
-          <summary>What is the goal of the game?</summary>
-          <p>The goal is to memorize and recall increasingly longer digit sequences by converting numbers into memorable images and stories.</p>
-        </details>
-
-        <details>
-          <summary>How does the Encode Phase work?</summary>
-          <p>During the Encode phase, players observe the digits on the selected card and use their peg cards to convert each digit into a corresponding visual mnemonic.</p>
-        </details>
-
-        <details>
-          <summary>How does the Build Phase work?</summary>
-          <p>In the Build phase, players connect these visual mnemonics into a meaningful, vivid, or imaginative story.</p>
-        </details>
-
-        <details>
-          <summary>How does the Recall Phase work?</summary>
-          <p>During the Recall phase, players attempt to reconstruct and state the original numerical sequence from memory.</p>
-        </details>
-
-        <details>
-          <summary>Who is the Winner?</summary>
-          <p>After the Recall phase, the winner is the player who accurately recalls the most digits while maintaining the correct sequence order.</p>
-        </details>
-
-        <details>
-          <summary>How are ties broken?</summary>
-          <p>If two or more players correctly recall the same number of digits, the tied players continue to the next digit sequence length.</p>
-        </details>
-
-        <details>
-          <summary>Should I hide my cards or can they be public knowledge?</summary>
-          <p>Players may keep their cards visible to all players. The challenge is not remembering the cards themselves, but using them to create effective stories.</p>
-        </details>
-      </div>
+    <section class="closing shell reveal">
+      <div class="closing-orb"><span>π</span><span>e</span><span>φ</span></div>
+      <p class="eyebrow">Euler's Golden Pie</p><h2>Don't memorize harder.<br />Remember smarter.</h2><p>Where numbers become images, images become stories, and stories become memory.</p><a class="btn primary magnetic" href="#home"><span>Return to the beginning</span><b>↑</b></a>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Euler's Golden Pie. Patent Pending.</p>
+    <div class="shell footer-inner"><a class="brand footer-brand" href="#home"><span class="brand-mark"><img src="assets/logo.png" alt="" /></span><span class="brand-copy"><strong>Euler's Golden Pie</strong><small>Memory, engineered.</small></span></a><p>© <span id="year"></span> Euler's Golden Pie. Patent Pending.</p><div><a href="#about">Explore</a><a href="#faq">FAQ</a></div></div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
