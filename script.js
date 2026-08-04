@@ -1,95 +1,58 @@
-const $ = (s, c = document) => c.querySelector(s);
-const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(pointer:fine)').matches;
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
-const header = $('[data-header]');
-const toggle = $('.nav-toggle');
-const navLinks = $('.nav-links');
-const year = $('#year');
-if (year) year.textContent = new Date().getFullYear();
+addEventListener('load',()=>setTimeout(()=>$('#boot')?.classList.add('hide'),650));
+$('#year').textContent=new Date().getFullYear();
 
-const onScroll = () => {
-  header?.classList.toggle('scrolled', scrollY > 24);
-  const rules = $('#rules');
-  const progress = $('.rule-progress');
-  if (rules && progress) {
-    const rect = rules.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (innerHeight - rect.top) / (rect.height + innerHeight * .2)));
-    progress.style.height = `${p * 100}%`;
-  }
-};
-onScroll(); addEventListener('scroll', onScroll, { passive: true });
+const header=$('[data-header]'), progress=$('.scroll-progress span');
+const scrollState=()=>{header?.classList.toggle('scrolled',scrollY>30);const max=document.documentElement.scrollHeight-innerHeight;progress.style.height=`${max?scrollY/max*100:0}%`;};
+scrollState();addEventListener('scroll',scrollState,{passive:true});
 
-toggle?.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', String(open));
-  document.body.classList.toggle('menu-open', open);
-  toggle.classList.toggle('active', open);
-});
-$$('.nav-links a').forEach(a => a.addEventListener('click', () => {
-  navLinks.classList.remove('open'); document.body.classList.remove('menu-open'); toggle?.setAttribute('aria-expanded', 'false');
-}));
+const menu=$('.menu'), nav=$('.nav-center');
+menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});
+$$('.nav-center a').forEach(a=>a.onclick=()=>{nav.classList.remove('open');document.body.classList.remove('menu-open');menu?.setAttribute('aria-expanded','false')});
 
-const observer = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) {
-    const delay = Number(e.target.dataset.delay || 0);
-    setTimeout(() => e.target.classList.add('visible'), delay);
-    observer.unobserve(e.target);
-  }
-}), { threshold: .12, rootMargin: '0px 0px -40px' });
-$$('.reveal').forEach(el => observer.observe(el));
+const revealObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -50px'});$$('[data-reveal]').forEach(el=>revealObs.observe(el));
 
-if (!reduceMotion && matchMedia('(pointer:fine)').matches) {
-  $$('.tilt-card').forEach(card => {
-    const strength = Number(card.dataset.tiltStrength || 4);
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - .5;
-      const y = (e.clientY - r.top) / r.height - .5;
-      card.style.transform = `perspective(1000px) rotateX(${-y * strength}deg) rotateY(${x * strength}deg) translateY(-3px)`;
-    });
-    card.addEventListener('mouseleave', () => card.style.transform = '');
-  });
-
-  $$('.magnetic').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*.09}px, ${(e.clientY-r.top-r.height/2)*.13}px)`;
-    });
-    btn.addEventListener('mouseleave', () => btn.style.transform = '');
-  });
+if(fine&&!reduced){
+ const dot=$('.cursor-dot'),ring=$('.cursor-ring');let mx=0,my=0,rx=0,ry=0;
+ addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`});
+ const cursorLoop=()=>{rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(cursorLoop)};cursorLoop();
+ $$('a,button,input,summary,.phase').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'))});
+ $$('.magnetic').forEach(el=>{el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.11}px,${(e.clientY-r.top-r.height/2)*.14}px)`});el.addEventListener('mouseleave',()=>el.style.transform='')});
+ const machine=$('#heroMachine');machine?.addEventListener('mousemove',e=>{const r=machine.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;$('.deck-front',machine).style.transform=`translateZ(40px) rotateX(${-y*7}deg) rotateY(${x*10}deg)`;$('.deck-back',machine).style.transform=`translate(${-145+x*18}px,${-10+y*12}px) rotateY(${23+x*6}deg) rotateZ(-10deg)`;$('.deck-mid',machine).style.transform=`translate(${135+x*16}px,${-20+y*10}px) rotateY(${-22+x*6}deg) rotateZ(9deg)`});machine?.addEventListener('mouseleave',()=>{$('.deck-front',machine).style.transform='';$('.deck-back',machine).style.transform='';$('.deck-mid',machine).style.transform=''})
 }
 
-$$('details').forEach(detail => detail.addEventListener('toggle', () => {
-  if (!detail.open) return;
-  const parent = detail.parentElement;
-  $$('details', parent).forEach(other => { if (other !== detail) other.open = false; });
-}));
+// Ambient field
+const canvas=$('#cosmos');
+if(canvas&&!reduced){const ctx=canvas.getContext('2d');let pts=[],w,h,dpr,mouse={x:-999,y:-999};const resize=()=>{w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);pts=Array.from({length:Math.min(95,Math.floor(w/14))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:Math.random()*1.3+.2}))};addEventListener('resize',resize);addEventListener('pointermove',e=>mouse={x:e.clientX,y:e.clientY},{passive:true});resize();const draw=()=>{ctx.clearRect(0,0,w,h);for(let i=0;i<pts.length;i++){const p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;const dm=Math.hypot(mouse.x-p.x,mouse.y-p.y);if(dm<160){p.x-=(mouse.x-p.x)*.0005;p.y-=(mouse.y-p.y)*.0005}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(130,185,230,.34)';ctx.fill();for(let j=i+1;j<pts.length;j++){const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(110,170,220,${.06*(1-d/100)})`;ctx.stroke()}}}requestAnimationFrame(draw)};draw()}
 
-// Lightweight ambient particle field—no framework or external runtime required.
-const canvas = $('#ambient-canvas');
-if (canvas && !reduceMotion) {
-  const ctx = canvas.getContext('2d');
-  let particles = [], mx = innerWidth/2, my = innerHeight/2, raf;
-  const resize = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
-    canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    const count = Math.min(80, Math.floor(innerWidth / 18));
-    particles = Array.from({length:count}, () => ({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,r:Math.random()*1.4+.3}));
-  };
-  addEventListener('resize', resize); addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY},{passive:true}); resize();
-  const draw = () => {
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    particles.forEach((p,i) => {
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<0||p.x>innerWidth)p.vx*=-1;if(p.y<0||p.y>innerHeight)p.vy*=-1;
-      const dx=mx-p.x,dy=my-p.y,d=Math.hypot(dx,dy); if(d<150){p.x-=dx*.00045;p.y-=dy*.00045;}
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(154,199,239,.32)';ctx.fill();
-      for(let j=i+1;j<particles.length;j++){const q=particles[j],dist=Math.hypot(p.x-q.x,p.y-q.y);if(dist<105){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(91,154,211,${.055*(1-dist/105)})`;ctx.stroke();}}
-    });
-    raf=requestAnimationFrame(draw);
-  }; draw();
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else draw();});
-}
+// Manifesto scroll choreography
+const manifesto=$('.manifesto'), lines=$$('.manifesto p');
+const manifestoMotion=()=>{if(!manifesto)return;const r=manifesto.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight),0,1);lines.forEach((line,i)=>{const center=i/(lines.length-1),dist=Math.abs(p-center);line.style.opacity=String(clamp(1-dist*4,.12,1));const dir=i%2?-1:1;line.style.transform=`translateX(${dir*(p-center)*26}vw)`})};addEventListener('scroll',manifestoMotion,{passive:true});manifestoMotion();
+
+// Phase switcher
+const phaseData=[['01 / ENCODE','Digits become visible identities.','33.33%'],['02 / BUILD','Images connect through a vivid causal story.','66.66%'],['03 / RECALL','The story decodes back into the original order.','100%']];
+$$('.phase').forEach((card,i)=>{const activate=()=>{$$('.phase').forEach(c=>c.classList.remove('active'));card.classList.add('active');const d=phaseData[i];$('#phaseDetail span').textContent=d[0];$('#phaseDetail p').textContent=d[1];$('.phase-meter i').style.width=d[2]};card.addEventListener('mouseenter',activate);card.addEventListener('click',activate)});
+
+// Memory lab
+const pegMap={0:['🍩','donut'],1:['🕯️','candle'],2:['🥢','chopsticks'],3:['🚦','traffic light'],4:['🧭','four directions'],5:['🖐️','high five'],6:['🎲','dice'],7:['🌈','rainbow'],8:['🕷️','spider'],9:['🪐','planets']};
+const connectors=['meets','launches','guides','chases','protects','surprises','pulls','lights','opens','rescues'];
+function encodeDigits(raw){const digits=raw.replace(/\D/g,'').slice(0,12)||'31415926';$('#digitInput').value=digits;$('#digitCount').textContent=`${digits.length} DIGIT${digits.length===1?'':'S'}`;const out=$('#pegSequence');out.innerHTML='';[...digits].forEach((d,i)=>{const el=document.createElement('div');el.className='peg-token';el.style.animationDelay=`${i*.055}s`;el.innerHTML=`<b>${pegMap[d][0]}</b><small>${d}</small>`;out.appendChild(el)});const names=[...digits].slice(0,5).map(d=>pegMap[d][1]);let sentence=names[0]||'A visual';for(let i=1;i<names.length;i++)sentence+=` ${connectors[(Number(digits[i])+i)%connectors.length]} a ${names[i]}`;$('#storySpark').textContent=sentence.charAt(0).toUpperCase()+sentence.slice(1)+'...';$('#labStatus').textContent='SEQUENCE ENCODED';setTimeout(()=>$('#labStatus').textContent='SYSTEM READY',1600)}
+$('#runLab')?.addEventListener('click',()=>encodeDigits($('#digitInput').value));$('#digitInput')?.addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));$('#digitInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')encodeDigits(e.currentTarget.value)});$$('.lab-presets button').forEach(b=>b.onclick=()=>encodeDigits(b.dataset.digits));encodeDigits('31415926');
+
+// Experience section
+const expSteps=$$('.experience-steps article'), expImg=$('#tableImage');const expObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;expSteps.forEach(s=>s.classList.remove('active'));e.target.classList.add('active');const n=Number(e.target.dataset.step);$('#expIndex').textContent=String(n).padStart(2,'0');expImg.style.transform=`rotateY(${-8+n*1.8}deg) rotateX(${4-n*.55}deg) scale(${.88+n*.025}) translateY(${(3-n)*9}px)`}),{threshold:.55});expSteps.forEach(s=>expObs.observe(s));
+
+// Components
+const components=[
+ {img:'assets/digitcards.png',kick:'THE CHALLENGE',title:'Digit Cards',text:'Sequences based on π, e, and φ create the numerical challenge that players encode, narrate, and recall.',list:['Three mathematical constant decks','Increasing sequence difficulty','Built for repeated play']},
+ {img:'assets/pegcards.png',kick:'THE VISUAL LANGUAGE',title:'Peg Cards',text:'Visual associations give digits a concrete identity through memorable objects, concepts, and actions.',list:['Multiple visual choices per digit','Flexible story construction','Fast visual recognition']},
+ {img:'assets/pegstand.png',kick:'THE STORY CANVAS',title:'Peg Stand',text:'A physical stage for arranging cues in sequence and seeing the memory chain take shape.',list:['Organized visual placement','Clear left-to-right sequencing','Tactile learning experience']},
+ {img:'assets/setup.png',kick:'THE COMPLETE EXPERIENCE',title:'Full Setup',text:'All components combine into a focused, competitive environment for encoding and recall.',list:['Complete physical memory system','Supports individual or group play','Designed for progression']}
+];
+$$('.component-tabs button').forEach((b,i)=>b.addEventListener('click',()=>{if(b.classList.contains('active'))return;$$('.component-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const visual=$('.component-visual'),d=components[i];visual.classList.add('swap');setTimeout(()=>{$('#componentImage').src=d.img;$('#componentImage').alt=d.title;$('#componentKicker').textContent=d.kick;$('#componentTitle').textContent=d.title;$('#componentText').textContent=d.text;$('#componentList').innerHTML=d.list.map(x=>`<li>${x}</li>`).join('');$('#componentNumber').textContent=String(i+1).padStart(2,'0');$('.component-code').textContent=`EGP-0${i+1}`;visual.classList.remove('swap')},280)}));
+
+$$('details').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open)return;$$('details',d.parentElement).forEach(o=>{if(o!==d)o.open=false})}));
