@@ -44,7 +44,39 @@ function encodeDigits(raw){const digits=raw.replace(/\D/g,'').slice(0,12)||'3141
 $('#runLab')?.addEventListener('click',()=>encodeDigits($('#digitInput').value));$('#digitInput')?.addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));$('#digitInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')encodeDigits(e.currentTarget.value)});$$('.lab-presets button').forEach(b=>b.onclick=()=>encodeDigits(b.dataset.digits));encodeDigits('31415926');
 
 // Experience section
-const expSteps=$$('.experience-steps article'), expImg=$('#tableImage');const expObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;expSteps.forEach(s=>s.classList.remove('active'));e.target.classList.add('active');const n=Number(e.target.dataset.step);$('#expIndex').textContent=String(n).padStart(2,'0');expImg.style.transform=`rotateY(${-8+n*1.8}deg) rotateX(${4-n*.55}deg) scale(${.88+n*.025}) translateY(${(3-n)*9}px)`}),{threshold:.55});expSteps.forEach(s=>expObs.observe(s));
+const expSteps = $$('.experience-steps article');
+const expImg = $('#tableImage');
+const expKicker = $('#expKicker');
+const expTitle = $('#expTitle');
+const expDescription = $('#expDescription');
+
+const updateExperience = (step) => {
+  const n = Number(step.dataset.step);
+  const kicker = step.querySelector('.eyebrow')?.textContent || '';
+  const title = step.querySelector('h3')?.textContent || '';
+  const description = step.querySelector('p:not(.eyebrow)')?.textContent || '';
+
+  expSteps.forEach(item => item.classList.toggle('active', item === step));
+  $('#expIndex').textContent = String(n).padStart(2, '0');
+
+  if (expKicker) expKicker.textContent = kicker;
+  if (expTitle) expTitle.textContent = title;
+  if (expDescription) expDescription.textContent = description;
+
+  if (expImg) {
+    expImg.style.transform = `rotateY(${-8 + n * 1.8}deg) rotateX(${4 - n * .55}deg) scale(${.88 + n * .025}) translateY(${(3 - n) * 9}px)`;
+  }
+};
+
+const expObs = new IntersectionObserver(entries => {
+  const visible = entries
+    .filter(entry => entry.isIntersecting)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (visible) updateExperience(visible.target);
+}, { threshold: [.35, .55, .75] });
+
+expSteps.forEach(step => expObs.observe(step));
+if (expSteps[0]) updateExperience(expSteps[0]);
 
 // Components
 const components=[
@@ -58,24 +90,14 @@ $$('.component-tabs button').forEach((b,i)=>b.addEventListener('click',()=>{if(b
 $$('details').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open)return;$$('details',d.parentElement).forEach(o=>{if(o!==d)o.open=false})}));
 
 // Beyond Madness: section radar + cinema mode
-const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['trial','04','TRIAL'],['vault','05','VAULT'],['experience','06','PLAY'],['components','07','OBJECTS'],['watch','08','FILMS'],['faq','09','FAQ']];
+const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['trial','04','PLAY'],['vault','05','VAULT'],['experience','06','PLAY'],['components','07','OBJECTS'],['watch','08','FILMS'],['faq','09','FAQ']];
 const radar=$('#sectionRadar');
 const radarObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const d=radarSections.find(x=>x[0]===e.target.id);if(d&&radar)radar.innerHTML=`<b>${d[1]}</b><span>${d[2]}</span>`}}),{threshold:.32});
 radarSections.forEach(([id])=>{const el=$('#'+id);if(el)radarObs.observe(el)});
-$('#cinemaToggle')?.addEventListener('click',()=>document.body.classList.toggle('cinema-mode'));
 
-// Live memory trial
-const trialPanels=$$('[data-trial-panel]'), trialRails=$$('.trial-rail span');
-let trialSequence='';
-const setTrialPanel=(name,rail=0,label='ACTIVE')=>{trialPanels.forEach(p=>p.classList.toggle('active',p.dataset.trialPanel===name));trialRails.forEach((r,i)=>r.classList.toggle('active',i===rail));$('#trialStageLabel').textContent=label};
-const randomDigits=n=>Array.from({length:n},()=>Math.floor(Math.random()*10)).join('');
-function beginTrial(){const n=Number($('#trialDifficulty').value||8);trialSequence=randomDigits(n);const wrap=$('#trialDigits');wrap.innerHTML=[...trialSequence].map((d,i)=>`<span style="animation-delay:${i*.07}s">${d}</span>`).join('');setTrialPanel('sequence',0,'OBSERVE');const bar=$('#trialTimerBar');bar.style.transition='none';bar.style.transform='scaleX(1)';requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition='transform 5.2s linear';bar.style.transform='scaleX(0)'}));setTimeout(showTrialEncode,5300)}
-function showTrialEncode(){const pegs=$('#trialPegs');pegs.innerHTML=[...trialSequence].map((d,i)=>`<div style="animation-delay:${i*.08}s">${pegMap[d][0]}<small>${d}</small></div>`).join('');const names=[...trialSequence].slice(0,6).map(d=>pegMap[d][1]);$('#trialStory').textContent=names.map((n,i)=>i?`${connectors[(+trialSequence[i]+i)%connectors.length]} a ${n}`:`A ${n}`).join(' ')+'.';setTrialPanel('encode',1,'ENCODE')}
-function showTrialRecall(){setTrialPanel('recall',2,'RECALL');$('#trialAnswer').value='';setTimeout(()=>$('#trialAnswer').focus(),200)}
-function gradeTrial(){const answer=$('#trialAnswer').value.replace(/\D/g,'').slice(0,trialSequence.length);let correct=0;[...trialSequence].forEach((d,i)=>{if(answer[i]===d)correct++});const score=Math.round(correct/trialSequence.length*100);$('#trialScore').textContent=score+'%';$('#trialVerdict').textContent=score===100?'PERFECT RECONSTRUCTION':score>=75?'STRONG RECALL TRAIL':score>=50?'THE STORY PARTIALLY HELD':'THE TRAIL NEEDS MORE STRUCTURE';$('#trialResultTitle').textContent=score===100?'The trail held.':score>=75?'Almost flawless.':score>=50?'You retained the architecture.':'Build a stranger story.';$('#trialResultText').textContent=`You reconstructed ${correct} of ${trialSequence.length} positions correctly. Original sequence: ${trialSequence}.`;setTrialPanel('result',2,'COMPLETE')}
-$('#startTrial')?.addEventListener('click',beginTrial);$('#continueTrial')?.addEventListener('click',showTrialRecall);$('#submitTrial')?.addEventListener('click',gradeTrial);$('#trialAnswer')?.addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));$('#trialAnswer')?.addEventListener('keydown',e=>{if(e.key==='Enter')gradeTrial()});$('#retryTrial')?.addEventListener('click',()=>setTrialPanel('intro',0,'STANDBY'));
+// Dedicated online game launch lives on a separate GitHub Pages experience.
 
 // Vault interaction
 const vaultMachine=$('#vaultMachine');
-$$('.vault-card').forEach(card=>card.addEventListener('click',()=>{$$('.vault-card').forEach(c=>c.classList.remove('active'));card.classList.add('active');$('#vaultConstant').textContent=card.dataset.constant}));
+$$('.vault-card').forEach(card=>card.addEventListener('click',()=>{$$('.vault-card').forEach(c=>c.classList.remove('active'));card.classList.add('active')}));
 if(vaultMachine&&fine&&!reduced){vaultMachine.addEventListener('pointermove',e=>{const r=vaultMachine.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;vaultMachine.style.transform=`rotateX(${-y*4}deg) rotateY(${x*6}deg)`});vaultMachine.addEventListener('pointerleave',()=>vaultMachine.style.transform='')}

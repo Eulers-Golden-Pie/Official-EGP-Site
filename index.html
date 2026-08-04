@@ -19,13 +19,13 @@
   <canvas id="cosmos" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div><button class="cinema-toggle" id="cinemaToggle" aria-label="Toggle cinema mode"><span></span> CINEMA</button><div class="section-radar" id="sectionRadar" aria-hidden="true"><b>01</b><span>HOME</span></div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div><div class="section-radar" id="sectionRadar" aria-hidden="true"><b>01</b><span>HOME</span></div>
 
   <header class="header" data-header>
     <nav class="nav shell">
       <a class="brand" href="#home" aria-label="Euler's Golden Pie home"><span class="brand-icon"><img src="assets/logo.png" alt=""></span><span><strong>Euler's Golden Pie</strong><small>Memory, engineered.</small></span></a>
       <div class="nav-center">
-        <a href="#system">System</a><a href="#lab">Memory Lab</a><a href="#trial">Live Trial</a><a href="#experience">Experience</a><a href="#components">Components</a><a href="#watch">Watch</a><a href="#faq">FAQ</a>
+        <a href="#system">System</a><a href="#lab">Memory Lab</a><a href="#trial">Play EGP</a><a href="#experience">Experience</a><a href="#components">Components</a><a href="#watch">Watch</a><a href="#faq">FAQ</a>
       </div>
       <a class="nav-action magnetic" href="#experience">Enter EGP <b>↗</b></a>
       <button class="menu" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
@@ -84,40 +84,52 @@
     </section>
 
 
-    <section class="trial section" id="trial">
+    <section class="trial game-launch section" id="trial">
       <div class="trial-shell shell">
-        <div class="section-head light" data-reveal><div><p class="eyebrow">THE LIVE MEMORY TRIAL</p><h2>Read less.<br><em>Prove it to yourself.</em></h2></div><p>A cinematic three-stage challenge that lets every visitor experience the EGP loop in under one minute.</p></div>
-        <div class="trial-stage" data-reveal>
-          <div class="trial-aura"></div>
-          <div class="trial-topline"><span>EGP // COGNITIVE TEST CHAMBER</span><strong id="trialStageLabel">STANDBY</strong></div>
-          <div class="trial-screen" id="trialScreen">
-            <div class="trial-intro active" data-trial-panel="intro">
-              <div class="trial-symbol">π</div>
-              <p class="eyebrow">MEMORY TRIAL 01</p>
-              <h3>Can a story outperform repetition?</h3>
-              <p>You will see a digit sequence, convert it into visual cues, then reconstruct it from memory.</p>
-              <div class="trial-controls"><label>DIFFICULTY <select id="trialDifficulty"><option value="6">6 digits</option><option value="8" selected>8 digits</option><option value="10">10 digits</option></select></label><button class="button gold magnetic" id="startTrial">Begin trial <b>→</b></button></div>
-            </div>
-            <div class="trial-sequence" data-trial-panel="sequence">
-              <p class="eyebrow">PHASE 01 · OBSERVE</p><h3>Hold the sequence.</h3><div class="trial-digits" id="trialDigits"></div><div class="trial-timer"><i id="trialTimerBar"></i></div><small>It will disappear automatically.</small>
-            </div>
-            <div class="trial-encode" data-trial-panel="encode">
-              <p class="eyebrow">PHASE 02 · ENCODE</p><h3>Now give the digits a visual trail.</h3><div class="trial-pegs" id="trialPegs"></div><p class="trial-story" id="trialStory"></p><button class="button gold magnetic" id="continueTrial">I built the story <b>→</b></button>
-            </div>
-            <div class="trial-recall" data-trial-panel="recall">
-              <p class="eyebrow">PHASE 03 · RECALL</p><h3>Reconstruct the original sequence.</h3><input id="trialAnswer" inputmode="numeric" autocomplete="off" placeholder="Enter the digits" aria-label="Enter recalled digits"><button class="button gold magnetic" id="submitTrial">Check recall <b>→</b></button>
-            </div>
-            <div class="trial-result" data-trial-panel="result"><div class="score-ring"><strong id="trialScore">100%</strong><span>RECALL</span></div><p class="eyebrow" id="trialVerdict">PERFECT RECONSTRUCTION</p><h3 id="trialResultTitle">The trail held.</h3><p id="trialResultText"></p><div class="trial-result-actions"><button class="button gold magnetic" id="retryTrial">Run it again</button><a class="button ghost" href="#system">Explore the system</a></div></div>
-          </div>
-          <div class="trial-rail"><span class="active">01 OBSERVE</span><i></i><span>02 ENCODE</span><i></i><span>03 RECALL</span></div>
+        <div class="section-head light" data-reveal>
+          <div><p class="eyebrow">PLAY EGP ONLINE</p><h2>Enter the story.<br><em>Test your memory.</em></h2></div>
+          <p>A dedicated browser experience is being built to demonstrate the core gameplay of Euler's Golden Pie—without replacing the complete physical game.</p>
         </div>
+
+        <a class="game-launch-card magnetic" href="https://eulers-golden-pie.github.io/EGP-Online-Experience/" target="_blank" rel="noopener" data-reveal aria-label="Open the EGP online gameplay experience in a new tab">
+          <div class="game-launch-glow"></div>
+          <div class="game-launch-grid" aria-hidden="true"></div>
+          <div class="game-launch-copy">
+            <div class="game-launch-status"><i></i><span>BROWSER EXPERIENCE</span><b>OPEN ↗</b></div>
+            <p class="eyebrow">THE DIGITAL GAMEPLAY DEMO</p>
+            <h3>Think you can<br><em>hold the sequence?</em></h3>
+            <p>Watch digits become images, connect them into a story, and reconstruct the original sequence before it disappears.</p>
+            <div class="game-launch-actions">
+              <span class="game-launch-button">Launch EGP Experience <b>↗</b></span>
+              <small>No download · Play in your browser</small>
+            </div>
+            <div class="game-launch-flow"><span>01 OBSERVE</span><i></i><span>02 ENCODE</span><i></i><span>03 RECALL</span></div>
+          </div>
+
+          <div class="game-launch-visual" aria-hidden="true">
+            <div class="launch-orbit orbit-one"></div><div class="launch-orbit orbit-two"></div>
+            <div class="launch-constant launch-pi">π</div><div class="launch-constant launch-e">e</div><div class="launch-constant launch-phi">φ</div>
+            <div class="launch-screen">
+              <div class="launch-screen-bar"><span>EGP // LIVE EXPERIENCE</span><i></i></div>
+              <img src="assets/setup.png" alt="">
+              <div class="launch-scan"></div>
+              <div class="launch-digits"><span>3</span><span>1</span><span>4</span><span>1</span><span>5</span><span>9</span></div>
+              <div class="launch-prompt"><small>MEMORY SEQUENCE</small><strong>BUILD THE STORY</strong></div>
+            </div>
+            <div class="launch-card lc-one"><span>7</span><small>RAINBOW</small></div>
+            <div class="launch-card lc-two"><span>3</span><small>TRAFFIC LIGHT</small></div>
+            <div class="launch-card lc-three"><span>1</span><small>CANDLE</small></div>
+          </div>
+        </a>
+
+        <p class="game-launch-note" data-reveal><strong>Digital gameplay demonstration.</strong> The complete physical game includes multiplayer competition, tactile cards, special actions, and the full EGP system.</p>
       </div>
     </section>
 
     <section class="vault section" id="vault">
       <div class="vault-backdrop"><div class="vault-grid"></div><div class="vault-beam"></div></div>
       <div class="shell vault-layout">
-        <div class="vault-copy" data-reveal><p class="eyebrow">THE MEMORY VAULT</p><h2>Every sequence hides<br><em>a world waiting to be built.</em></h2><p>Move across the vault to reveal how abstract digits become physical, visual, and narrative landmarks.</p><div class="vault-readout"><span>ACTIVE CONSTANT</span><strong id="vaultConstant">π · 3.1415926</strong></div></div>
+        <div class="vault-copy" data-reveal><p class="eyebrow">THE MEMORY VAULT</p><h2>Every sequence hides<br><em>a world waiting to be built.</em></h2><p>Move across the vault to reveal how abstract digits become physical, visual, and narrative landmarks.</p></div>
         <div class="vault-machine" id="vaultMachine" data-reveal>
           <div class="vault-core"><img src="assets/logo.png" alt=""><span>EGP</span></div>
           <button class="vault-card v1" data-constant="π · 3.1415926"><b>π</b><small>GEOMETRY</small></button>
@@ -130,18 +142,27 @@
 
     <section class="experience section" id="experience">
       <div class="experience-sticky">
-        <div class="experience-copy"><p class="eyebrow">THE GAME EXPERIENCE</p><h2>Five moves.<br><em>One unforgettable round.</em></h2><p>Scroll through the sequence as the table comes alive.</p><div class="experience-index"><strong id="expIndex">01</strong><span>/ 05</span></div></div>
+        <div class="experience-copy">
+          <p class="eyebrow">THE GAME EXPERIENCE</p>
+          <h2>Five moves.<br><em>One unforgettable part.</em></h2>
+          <div class="experience-active-copy" aria-live="polite">
+            <p class="experience-active-kicker" id="expKicker">CHOOSE</p>
+            <h3 id="expTitle">Draw the sequence.</h3>
+            <p id="expDescription">Select a digit card from π, e, or φ. The part begins with pure information.</p>
+          </div>
+          <div class="experience-index"><strong id="expIndex">01</strong><span>/ 05</span></div>
+        </div>
         <div class="table-stage">
           <div class="table-glow"></div><img src="assets/setup.png" alt="Euler's Golden Pie game setup" id="tableImage">
           <div class="scanline"></div><div class="table-callout c1">DIGIT DECK</div><div class="table-callout c2">PEG LANGUAGE</div><div class="table-callout c3">STORY FIELD</div>
         </div>
       </div>
       <div class="experience-steps shell">
-        <article data-step="1"><span>01</span><div><p class="eyebrow">CHOOSE</p><h3>Draw the sequence.</h3><p>Select a digit card from π, e, or φ. The round begins with pure information.</p></div></article>
+        <article data-step="1"><span>01</span><div><p class="eyebrow">CHOOSE</p><h3>Draw the sequence.</h3><p>Select a digit card from π, e, or φ. The part begins with pure information.</p></div></article>
         <article data-step="2"><span>02</span><div><p class="eyebrow">TRANSLATE</p><h3>Encode the digits.</h3><p>Use peg cards to give every number a visible, memorable identity.</p></div></article>
         <article data-step="3"><span>03</span><div><p class="eyebrow">IMAGINE</p><h3>Build the story.</h3><p>Connect the visuals with movement, emotion, cause, and consequence.</p></div></article>
         <article data-step="4"><span>04</span><div><p class="eyebrow">RECONSTRUCT</p><h3>Recall the sequence.</h3><p>Replay the story and decode each cue back into its original digit.</p></div></article>
-        <article data-step="5"><span>05</span><div><p class="eyebrow">COMPETE</p><h3>Push memory further.</h3><p>The player who recalls the longest correct sequence wins the round.</p></div></article>
+        <article data-step="5"><span>05</span><div><p class="eyebrow">COMPETE</p><h3>Push memory further.</h3><p>The player who recalls the longest correct sequence wins the part.</p></div></article>
       </div>
     </section>
 
@@ -172,7 +193,7 @@
     </section>
 
     <section class="faq section shell" id="faq">
-      <div class="section-head" data-reveal><div><p class="eyebrow">QUESTIONS, ANSWERED</p><h2>Everything you need<br><em>before the first round.</em></h2></div></div>
+      <div class="section-head" data-reveal><div><p class="eyebrow">QUESTIONS, ANSWERED</p><h2>Everything you need<br><em>before the first part.</em></h2></div></div>
       <div class="faq-grid"><details data-reveal><summary>What is Euler's Golden Pie?<i></i></summary><p>EGP is a memory game and learning system designed to make memorizing long number sequences faster, easier, more creative, and more enjoyable.</p></details><details data-reveal><summary>What makes EGP unique?<i></i></summary><p>It combines visual encoding, storytelling, physical components, and friendly competition in one structured experience.</p></details><details data-reveal><summary>How does Encode work?<i></i></summary><p>Players observe the digits and select peg cards that convert them into visual mnemonics.</p></details><details data-reveal><summary>How does Build work?<i></i></summary><p>Players connect those visual mnemonics into a meaningful, vivid, or imaginative story.</p></details><details data-reveal><summary>How does Recall work?<i></i></summary><p>Players mentally replay the story and translate each visual cue back into the original sequence.</p></details><details data-reveal><summary>Who wins?<i></i></summary><p>The player who accurately recalls the greatest number of digits while preserving the correct order.</p></details><details data-reveal><summary>Can peg cards remain visible?<i></i></summary><p>Yes. The challenge is not remembering the cards—it is building and decoding the story effectively.</p></details><details data-reveal><summary>How are ties broken?<i></i></summary><p>Tied players continue to the next sequence length until one player recalls more digits correctly.</p></details></div>
     </section>
 
