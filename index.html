@@ -19,13 +19,13 @@
   <canvas id="cosmos" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div><button class="cinema-toggle" id="cinemaToggle" aria-label="Toggle cinema mode"><span></span> CINEMA</button><div class="section-radar" id="sectionRadar" aria-hidden="true"><b>01</b><span>HOME</span></div>
 
   <header class="header" data-header>
     <nav class="nav shell">
       <a class="brand" href="#home" aria-label="Euler's Golden Pie home"><span class="brand-icon"><img src="assets/logo.png" alt=""></span><span><strong>Euler's Golden Pie</strong><small>Memory, engineered.</small></span></a>
       <div class="nav-center">
-        <a href="#system">System</a><a href="#lab">Memory Lab</a><a href="#experience">Experience</a><a href="#components">Components</a><a href="#watch">Watch</a><a href="#faq">FAQ</a>
+        <a href="#system">System</a><a href="#lab">Memory Lab</a><a href="#trial">Live Trial</a><a href="#experience">Experience</a><a href="#components">Components</a><a href="#watch">Watch</a><a href="#faq">FAQ</a>
       </div>
       <a class="nav-action magnetic" href="#experience">Enter EGP <b>↗</b></a>
       <button class="menu" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
@@ -79,6 +79,51 @@
             <div class="lab-output"><div class="output-label"><span>VISUAL PEG SEQUENCE</span><small id="digitCount">8 DIGITS</small></div><div class="peg-sequence" id="pegSequence"></div><div class="story-prompt"><span>STORY SPARK</span><p id="storySpark">A traffic light guides a candle toward the four seasons...</p></div></div>
           </div>
           <div class="console-bottom"><span>VISUAL ENCODING</span><i></i><span>STORY CONNECTION</span><i></i><span>ORDERED RECALL</span></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="trial section" id="trial">
+      <div class="trial-shell shell">
+        <div class="section-head light" data-reveal><div><p class="eyebrow">THE LIVE MEMORY TRIAL</p><h2>Read less.<br><em>Prove it to yourself.</em></h2></div><p>A cinematic three-stage challenge that lets every visitor experience the EGP loop in under one minute.</p></div>
+        <div class="trial-stage" data-reveal>
+          <div class="trial-aura"></div>
+          <div class="trial-topline"><span>EGP // COGNITIVE TEST CHAMBER</span><strong id="trialStageLabel">STANDBY</strong></div>
+          <div class="trial-screen" id="trialScreen">
+            <div class="trial-intro active" data-trial-panel="intro">
+              <div class="trial-symbol">π</div>
+              <p class="eyebrow">MEMORY TRIAL 01</p>
+              <h3>Can a story outperform repetition?</h3>
+              <p>You will see a digit sequence, convert it into visual cues, then reconstruct it from memory.</p>
+              <div class="trial-controls"><label>DIFFICULTY <select id="trialDifficulty"><option value="6">6 digits</option><option value="8" selected>8 digits</option><option value="10">10 digits</option></select></label><button class="button gold magnetic" id="startTrial">Begin trial <b>→</b></button></div>
+            </div>
+            <div class="trial-sequence" data-trial-panel="sequence">
+              <p class="eyebrow">PHASE 01 · OBSERVE</p><h3>Hold the sequence.</h3><div class="trial-digits" id="trialDigits"></div><div class="trial-timer"><i id="trialTimerBar"></i></div><small>It will disappear automatically.</small>
+            </div>
+            <div class="trial-encode" data-trial-panel="encode">
+              <p class="eyebrow">PHASE 02 · ENCODE</p><h3>Now give the digits a visual trail.</h3><div class="trial-pegs" id="trialPegs"></div><p class="trial-story" id="trialStory"></p><button class="button gold magnetic" id="continueTrial">I built the story <b>→</b></button>
+            </div>
+            <div class="trial-recall" data-trial-panel="recall">
+              <p class="eyebrow">PHASE 03 · RECALL</p><h3>Reconstruct the original sequence.</h3><input id="trialAnswer" inputmode="numeric" autocomplete="off" placeholder="Enter the digits" aria-label="Enter recalled digits"><button class="button gold magnetic" id="submitTrial">Check recall <b>→</b></button>
+            </div>
+            <div class="trial-result" data-trial-panel="result"><div class="score-ring"><strong id="trialScore">100%</strong><span>RECALL</span></div><p class="eyebrow" id="trialVerdict">PERFECT RECONSTRUCTION</p><h3 id="trialResultTitle">The trail held.</h3><p id="trialResultText"></p><div class="trial-result-actions"><button class="button gold magnetic" id="retryTrial">Run it again</button><a class="button ghost" href="#system">Explore the system</a></div></div>
+          </div>
+          <div class="trial-rail"><span class="active">01 OBSERVE</span><i></i><span>02 ENCODE</span><i></i><span>03 RECALL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vault section" id="vault">
+      <div class="vault-backdrop"><div class="vault-grid"></div><div class="vault-beam"></div></div>
+      <div class="shell vault-layout">
+        <div class="vault-copy" data-reveal><p class="eyebrow">THE MEMORY VAULT</p><h2>Every sequence hides<br><em>a world waiting to be built.</em></h2><p>Move across the vault to reveal how abstract digits become physical, visual, and narrative landmarks.</p><div class="vault-readout"><span>ACTIVE CONSTANT</span><strong id="vaultConstant">π · 3.1415926</strong></div></div>
+        <div class="vault-machine" id="vaultMachine" data-reveal>
+          <div class="vault-core"><img src="assets/logo.png" alt=""><span>EGP</span></div>
+          <button class="vault-card v1" data-constant="π · 3.1415926"><b>π</b><small>GEOMETRY</small></button>
+          <button class="vault-card v2" data-constant="e · 2.7182818"><b>e</b><small>CHANGE</small></button>
+          <button class="vault-card v3" data-constant="φ · 1.6180339"><b>φ</b><small>PROPORTION</small></button>
+          <div class="vault-orbit o1"></div><div class="vault-orbit o2"></div><div class="vault-orbit o3"></div>
         </div>
       </div>
     </section>

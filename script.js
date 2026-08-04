@@ -56,3 +56,26 @@ const components=[
 $$('.component-tabs button').forEach((b,i)=>b.addEventListener('click',()=>{if(b.classList.contains('active'))return;$$('.component-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const visual=$('.component-visual'),d=components[i];visual.classList.add('swap');setTimeout(()=>{$('#componentImage').src=d.img;$('#componentImage').alt=d.title;$('#componentKicker').textContent=d.kick;$('#componentTitle').textContent=d.title;$('#componentText').textContent=d.text;$('#componentList').innerHTML=d.list.map(x=>`<li>${x}</li>`).join('');$('#componentNumber').textContent=String(i+1).padStart(2,'0');$('.component-code').textContent=`EGP-0${i+1}`;visual.classList.remove('swap')},280)}));
 
 $$('details').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open)return;$$('details',d.parentElement).forEach(o=>{if(o!==d)o.open=false})}));
+
+// Beyond Madness: section radar + cinema mode
+const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['trial','04','TRIAL'],['vault','05','VAULT'],['experience','06','PLAY'],['components','07','OBJECTS'],['watch','08','FILMS'],['faq','09','FAQ']];
+const radar=$('#sectionRadar');
+const radarObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const d=radarSections.find(x=>x[0]===e.target.id);if(d&&radar)radar.innerHTML=`<b>${d[1]}</b><span>${d[2]}</span>`}}),{threshold:.32});
+radarSections.forEach(([id])=>{const el=$('#'+id);if(el)radarObs.observe(el)});
+$('#cinemaToggle')?.addEventListener('click',()=>document.body.classList.toggle('cinema-mode'));
+
+// Live memory trial
+const trialPanels=$$('[data-trial-panel]'), trialRails=$$('.trial-rail span');
+let trialSequence='';
+const setTrialPanel=(name,rail=0,label='ACTIVE')=>{trialPanels.forEach(p=>p.classList.toggle('active',p.dataset.trialPanel===name));trialRails.forEach((r,i)=>r.classList.toggle('active',i===rail));$('#trialStageLabel').textContent=label};
+const randomDigits=n=>Array.from({length:n},()=>Math.floor(Math.random()*10)).join('');
+function beginTrial(){const n=Number($('#trialDifficulty').value||8);trialSequence=randomDigits(n);const wrap=$('#trialDigits');wrap.innerHTML=[...trialSequence].map((d,i)=>`<span style="animation-delay:${i*.07}s">${d}</span>`).join('');setTrialPanel('sequence',0,'OBSERVE');const bar=$('#trialTimerBar');bar.style.transition='none';bar.style.transform='scaleX(1)';requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition='transform 5.2s linear';bar.style.transform='scaleX(0)'}));setTimeout(showTrialEncode,5300)}
+function showTrialEncode(){const pegs=$('#trialPegs');pegs.innerHTML=[...trialSequence].map((d,i)=>`<div style="animation-delay:${i*.08}s">${pegMap[d][0]}<small>${d}</small></div>`).join('');const names=[...trialSequence].slice(0,6).map(d=>pegMap[d][1]);$('#trialStory').textContent=names.map((n,i)=>i?`${connectors[(+trialSequence[i]+i)%connectors.length]} a ${n}`:`A ${n}`).join(' ')+'.';setTrialPanel('encode',1,'ENCODE')}
+function showTrialRecall(){setTrialPanel('recall',2,'RECALL');$('#trialAnswer').value='';setTimeout(()=>$('#trialAnswer').focus(),200)}
+function gradeTrial(){const answer=$('#trialAnswer').value.replace(/\D/g,'').slice(0,trialSequence.length);let correct=0;[...trialSequence].forEach((d,i)=>{if(answer[i]===d)correct++});const score=Math.round(correct/trialSequence.length*100);$('#trialScore').textContent=score+'%';$('#trialVerdict').textContent=score===100?'PERFECT RECONSTRUCTION':score>=75?'STRONG RECALL TRAIL':score>=50?'THE STORY PARTIALLY HELD':'THE TRAIL NEEDS MORE STRUCTURE';$('#trialResultTitle').textContent=score===100?'The trail held.':score>=75?'Almost flawless.':score>=50?'You retained the architecture.':'Build a stranger story.';$('#trialResultText').textContent=`You reconstructed ${correct} of ${trialSequence.length} positions correctly. Original sequence: ${trialSequence}.`;setTrialPanel('result',2,'COMPLETE')}
+$('#startTrial')?.addEventListener('click',beginTrial);$('#continueTrial')?.addEventListener('click',showTrialRecall);$('#submitTrial')?.addEventListener('click',gradeTrial);$('#trialAnswer')?.addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));$('#trialAnswer')?.addEventListener('keydown',e=>{if(e.key==='Enter')gradeTrial()});$('#retryTrial')?.addEventListener('click',()=>setTrialPanel('intro',0,'STANDBY'));
+
+// Vault interaction
+const vaultMachine=$('#vaultMachine');
+$$('.vault-card').forEach(card=>card.addEventListener('click',()=>{$$('.vault-card').forEach(c=>c.classList.remove('active'));card.classList.add('active');$('#vaultConstant').textContent=card.dataset.constant}));
+if(vaultMachine&&fine&&!reduced){vaultMachine.addEventListener('pointermove',e=>{const r=vaultMachine.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;vaultMachine.style.transform=`rotateX(${-y*4}deg) rotateY(${x*6}deg)`});vaultMachine.addEventListener('pointerleave',()=>vaultMachine.style.transform='')}
