@@ -90,12 +90,10 @@ $$('.component-tabs button').forEach((b,i)=>b.addEventListener('click',()=>{if(b
 $$('details').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open)return;$$('details',d.parentElement).forEach(o=>{if(o!==d)o.open=false})}));
 
 // Beyond Madness: section radar + cinema mode
-const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['trial','04','PLAY'],['vault','05','VAULT'],['experience','06','PLAY'],['components','07','OBJECTS'],['watch','08','FILMS'],['faq','09','FAQ']];
+const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['vault','04','VAULT'],['experience','05','PLAY'],['components','06','OBJECTS'],['watch','07','FILMS'],['faq','08','FAQ']];
 const radar=$('#sectionRadar');
 const radarObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const d=radarSections.find(x=>x[0]===e.target.id);if(d&&radar)radar.innerHTML=`<b>${d[1]}</b><span>${d[2]}</span>`}}),{threshold:.32});
 radarSections.forEach(([id])=>{const el=$('#'+id);if(el)radarObs.observe(el)});
-
-// Dedicated online game launch lives on a separate GitHub Pages experience.
 
 // Vault interaction
 const vaultMachine=$('#vaultMachine');
