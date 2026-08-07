@@ -37,11 +37,6 @@ const manifestoMotion=()=>{if(!manifesto)return;const r=manifesto.getBoundingCli
 const phaseData=[['01 / ENCODE','Digits become visible identities.','33.33%'],['02 / BUILD','Images connect through a vivid causal story.','66.66%'],['03 / RECALL','The story decodes back into the original order.','100%']];
 $$('.phase').forEach((card,i)=>{const activate=()=>{$$('.phase').forEach(c=>c.classList.remove('active'));card.classList.add('active');const d=phaseData[i];$('#phaseDetail span').textContent=d[0];$('#phaseDetail p').textContent=d[1];$('.phase-meter i').style.width=d[2]};card.addEventListener('mouseenter',activate);card.addEventListener('click',activate)});
 
-// Memory lab
-const pegMap={0:['🍩','donut'],1:['🕯️','candle'],2:['🥢','chopsticks'],3:['🚦','traffic light'],4:['🧭','four directions'],5:['🖐️','high five'],6:['🎲','dice'],7:['🌈','rainbow'],8:['🕷️','spider'],9:['🪐','planets']};
-const connectors=['meets','launches','guides','chases','protects','surprises','pulls','lights','opens','rescues'];
-function encodeDigits(raw){const digits=raw.replace(/\D/g,'').slice(0,12)||'31415926';$('#digitInput').value=digits;$('#digitCount').textContent=`${digits.length} DIGIT${digits.length===1?'':'S'}`;const out=$('#pegSequence');out.innerHTML='';[...digits].forEach((d,i)=>{const el=document.createElement('div');el.className='peg-token';el.style.animationDelay=`${i*.055}s`;el.innerHTML=`<b>${pegMap[d][0]}</b><small>${d}</small>`;out.appendChild(el)});const names=[...digits].slice(0,5).map(d=>pegMap[d][1]);let sentence=names[0]||'A visual';for(let i=1;i<names.length;i++)sentence+=` ${connectors[(Number(digits[i])+i)%connectors.length]} a ${names[i]}`;$('#storySpark').textContent=sentence.charAt(0).toUpperCase()+sentence.slice(1)+'...';$('#labStatus').textContent='SEQUENCE ENCODED';setTimeout(()=>$('#labStatus').textContent='SYSTEM READY',1600)}
-$('#runLab')?.addEventListener('click',()=>encodeDigits($('#digitInput').value));$('#digitInput')?.addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));$('#digitInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')encodeDigits(e.currentTarget.value)});$$('.lab-presets button').forEach(b=>b.onclick=()=>encodeDigits(b.dataset.digits));encodeDigits('31415926');
 
 // Experience section
 const expSteps = $$('.experience-steps article');
@@ -90,7 +85,7 @@ $$('.component-tabs button').forEach((b,i)=>b.addEventListener('click',()=>{if(b
 $$('details').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open)return;$$('details',d.parentElement).forEach(o=>{if(o!==d)o.open=false})}));
 
 // Beyond Madness: section radar + cinema mode
-const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['lab','03','LAB'],['vault','04','VAULT'],['experience','05','PLAY'],['components','06','OBJECTS'],['watch','07','FILMS'],['faq','08','FAQ']];
+const radarSections=[['home','01','HOME'],['system','02','SYSTEM'],['vault','03','VAULT'],['experience','04','PLAY'],['components','05','OBJECTS'],['watch','06','FILMS'],['faq','07','FAQ']];
 const radar=$('#sectionRadar');
 const radarObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const d=radarSections.find(x=>x[0]===e.target.id);if(d&&radar)radar.innerHTML=`<b>${d[1]}</b><span>${d[2]}</span>`}}),{threshold:.32});
 radarSections.forEach(([id])=>{const el=$('#'+id);if(el)radarObs.observe(el)});

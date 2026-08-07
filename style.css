@@ -112,3 +112,24 @@
 
 /* Final cleanup: section radar removed from official release. */
 .section-radar{display:none!important}
+
+
+/* Mobile experience optimization: replace desktop sticky choreography with a clean card flow. */
+@media(max-width:680px){
+  .experience{padding:84px 0 94px;background:#020811}
+  .experience-sticky{height:auto;position:relative;top:auto;display:block;padding:0 14px;overflow:visible}
+  .experience-copy{position:relative;left:auto;top:auto;z-index:3;margin:0 auto 28px;width:min(100%,620px)}
+  .experience-copy h2{font-size:clamp(2.65rem,12vw,3.8rem);margin:14px 0 0}
+  .experience-active-copy,.experience-index{display:none}
+  .table-stage{height:auto;min-height:0;padding:0;perspective:none;margin:0 auto 30px;width:min(100%,620px)}
+  .table-stage img{width:100%;max-height:none;aspect-ratio:4/3;object-fit:cover;border-radius:22px;transform:none!important;box-shadow:0 28px 75px rgba(0,0,0,.48)}
+  .table-glow{width:75%;height:65%;filter:blur(65px)}
+  .scanline,.table-callout{display:none}
+  .experience-steps{position:relative;margin:0 auto;padding:0;width:min(calc(100% - 28px),620px);display:grid;gap:14px}
+  .experience-steps article,.experience-steps article.active{min-height:0;max-width:none;margin:0;padding:22px 20px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;align-content:start;opacity:1;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:20px;backdrop-filter:none}
+  .experience-steps article>*{display:block}
+  .experience-steps article>span{padding-top:3px;font-size:.63rem}
+  .experience-steps h3{font-size:1.38rem;line-height:1.12;margin:5px 0 8px;letter-spacing:-.025em}
+  .experience-steps p.eyebrow{margin:0;font-size:.58rem}
+  .experience-steps p:not(.eyebrow){margin:0;font-size:.82rem;line-height:1.58}
+}
