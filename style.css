@@ -126,7 +126,7 @@
   .table-glow{width:75%;height:65%;filter:blur(65px)}
   .scanline,.table-callout{display:none}
   .experience-steps{position:relative;margin:0 auto;padding:0;width:min(calc(100% - 28px),620px);display:grid;gap:14px}
-  .experience-steps article,.experience-steps article.active{min-height:0;max-width:none;margin:0;padding:22px 20px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;align-content:start;opacity:1;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:20px;backdrop-filter:none}
+  .experience-steps article,.experience-steps article.active{min-height:0;max-width:none;margin:0;padding:22px 20px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;align-content:start;opacity:1;visibility:visible;transform:none;pointer-events:auto;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:20px;backdrop-filter:none}
   .experience-steps article>*{display:block}
   .experience-steps article>span{padding-top:3px;font-size:.63rem}
   .experience-steps h3{font-size:1.38rem;line-height:1.12;margin:5px 0 8px;letter-spacing:-.025em}
